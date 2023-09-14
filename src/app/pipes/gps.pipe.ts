@@ -18,11 +18,29 @@ export class GpsPipe implements PipeTransform {
       str += ',';
       str += dp.transform(value.longitude, '.6');
     } else {
-      let dp = new DecimalPipe(this._locale);
-      str += 'lat: ' + dp.transform(value.latitude, '.6');
-      str += ', lng: ' + dp.transform(value.longitude, '.6');
+      str =  this.convertDMS(coordonnees.latitude,coordonnees.longitude)
     }
     return str;
+  }
+
+
+  private toDegreesMinutesAndSeconds(coordinate:number) {
+    var absolute = Math.abs(coordinate);
+    var degrees = Math.floor(absolute);
+    var minutesNotTruncated = (absolute - degrees) * 60;
+    var minutes = Math.floor(minutesNotTruncated);
+    var seconds = Math.floor((minutesNotTruncated - minutes) * 60);
+    return degrees + "°" + minutes + "′" + seconds + "″";
+  }
+
+  private convertDMS(lat:number, lng:number) {
+    var latitude = this.toDegreesMinutesAndSeconds(lat);
+    var latitudeCardinal = lat >= 0 ? "N" : "S";
+
+    var longitude = this.toDegreesMinutesAndSeconds(lng);
+    var longitudeCardinal = lng >= 0 ? "E" : "W";
+
+    return latitude + " " + latitudeCardinal + "\n" + longitude + " " + longitudeCardinal;
   }
 
 }
