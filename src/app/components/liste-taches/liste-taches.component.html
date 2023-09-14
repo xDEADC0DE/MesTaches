@@ -1,0 +1,38 @@
+<section class="btn-toolbar">
+<div class="btn-group me-2">
+  <button (click)="trier(lesTris.LIBELLE)" class="btn btn-light" [ngClass]="{ 'active': triActif === lesTris.LIBELLE }">
+    <i class="fa fa-arrow-down-a-z"></i>
+  </button>
+  <button (click)="trier(lesTris.ECHEANCE)" class="btn btn-light" [ngClass]="{ 'active': triActif === lesTris.ECHEANCE }">
+    <i class="fa fa-arrow-down-1-9"></i>
+  </button>
+</div>
+
+<div class="btn-group">
+  <button (click)="filtrer()" [ngClass]="{ 'active': filtreActif === undefined }" class="btn btn-light">
+    Toutes
+  </button>
+  <button (click)="filtrer(lesFiltres.EN_COURS)"
+  [ngClass]="{ 'active': filtreActif === lesFiltres.EN_COURS}"
+  class="btn btn-light">
+    En cours
+  </button>
+  <button (click)="filtrer(lesFiltres.EN_RETARD)" [ngClass]="{ 'active': filtreActif === lesFiltres.EN_RETARD}" class="btn btn-light">
+    En retard
+  </button>
+  <button (click)="filtrer(lesFiltres.CLOTUREE)" [ngClass]="{ 'active': filtreActif === lesFiltres.CLOTUREE}" class="btn btn-light">
+    Cloturées
+  </button>
+</div>
+</section>
+
+<app-detail-tache
+  *ngFor="let t of tachesFiltrees" [laTache]="t">
+</app-detail-tache>
+
+<!--
+for(let t of tachesFiltrees){
+  let dtc = new DetailTacheComponent(/*services*/);
+  dtc.leTache = t;
+}
+-->

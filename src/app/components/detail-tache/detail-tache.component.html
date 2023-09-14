@@ -1,0 +1,28 @@
+<section *ngIf="laTache" class="card mt-2">
+  <div class="card-body">
+    <i [ngClass]="laTache.estTerminee ? 'fa-check-circle' : 'fa-circle'" class="far fa-2x float-end"></i>
+
+    <h5 class="card-title">{{ laTache.libelle }}</h5>
+    <div>
+      <span class="badge text-bg-dark me-1">
+        <i class="fa fa-calendar-check"></i>
+        {{ laTache.echeance | date :'dd/MM/y' }}
+      </span>
+      <span [ngClass]="laTache.statut | tachestatut :'bootstrap'" class="badge">
+        {{ laTache.statut | tachestatut }}
+      </span>
+      <!-- new TacheStatutPipe(/* DI */).transform(laTache.statut) -->
+    </div>
+  </div>
+
+  <div class="card-footer text-end">
+    <div class="btn-group btn-group-sm">
+      <button *ngIf="laTache.coordonnees" [title]="laTache.coordonnees | gps" class="btn btn-link">
+        <i class="fa fa-map-marker-alt text-dark"></i>
+      </button>
+      <button class="btn btn-link">
+        <i class="fa fa-trash-alt text-danger"></i>
+      </button>
+    </div>
+  </div>
+</section>
