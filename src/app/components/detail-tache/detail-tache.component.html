@@ -19,6 +19,7 @@
     <div class="btn-group btn-group-sm">
       <button *ngIf="laTache.coordonnees" [title]="laTache.coordonnees | gps" class="btn btn-link">
         <i class="fa fa-map-marker-alt text-dark"></i>
+        {{ laTache.coordonnees | gps :'googlemap' }}
       </button>
       <button class="btn btn-link">
         <i class="fa fa-trash-alt text-danger"></i>
